@@ -11190,3 +11190,18 @@ body {
 .footer {
   padding: 5rem 0;
 }
+
+.circle-simulation {
+  width: min(78vw, 42vh, 520px);
+  aspect-ratio: 1;
+  margin: 1rem auto 0;
+}
+.circle-simulation canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.resume-link:hover {
+  color: white !important;
+}
