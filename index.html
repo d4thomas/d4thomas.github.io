@@ -14,6 +14,19 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <style>
+            .circle-simulation {
+                width: min(78vw, 42vh, 520px);
+                aspect-ratio: 1;
+                margin: 1rem auto 0;
+            }
+
+            .circle-simulation canvas {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
     </head>
     <body id="page-top">
         <!-- Masthead-->
@@ -23,6 +36,115 @@
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase">Daniel Thomas</h1>
                         <h2 class="text-white-50 mx-auto mt-2 mb-5">= > ÷</h2>
+                        <div class="circle-simulation">
+                            <canvas width="480" height="480" aria-label="Random circle collision simulation"></canvas>
+                            <script>
+                                (() => {
+                                    const root = document.currentScript.parentElement;
+                                    const canvas = root.querySelector("canvas");
+                                    const context = canvas.getContext("2d");
+                                    const center = { x: 240, y: 240 };
+                                    const boundaryRadius = 180;
+                                    const maximumCircles = 5000;
+                                    const cooldownFrames = 90;
+                                    let collisions = 0;
+                                    let circles = [];
+
+                                    function createCircle(x, y, radius, color) {
+                                        const angle = Math.random() * Math.PI * 2;
+                                        const speed = 1.5 + Math.random() * 1.5;
+                                        return { x, y, radius, color, cooldown: 0,
+                                            velocity: { x: Math.cos(angle) * speed, y: Math.sin(angle) * speed } };
+                                    }
+
+                                    circles = [
+                                        createCircle(182, 240, 20, "#8a8a8a"),
+                                        createCircle(298, 240, 20, "#c4c4c4")
+                                    ];
+
+                                    function updateCircle(circle) {
+                                        if (circle.cooldown > 0) circle.cooldown -= 1;
+                                        const angle = (Math.random() * 10 - 5) * Math.PI / 180;
+                                        const cosine = Math.cos(angle);
+                                        const sine = Math.sin(angle);
+                                        const rotatedX = circle.velocity.x * cosine - circle.velocity.y * sine;
+                                        const rotatedY = circle.velocity.x * sine + circle.velocity.y * cosine;
+                                        const speed = 1.5 + Math.random() * 1.5;
+                                        const length = Math.hypot(rotatedX, rotatedY) || 1;
+                                        circle.velocity.x = rotatedX / length * speed;
+                                        circle.velocity.y = rotatedY / length * speed;
+                                        circle.x += circle.velocity.x;
+                                        circle.y += circle.velocity.y;
+                                        const offsetX = circle.x - center.x;
+                                        const offsetY = circle.y - center.y;
+                                        const distance = Math.hypot(offsetX, offsetY);
+                                        const maximumDistance = boundaryRadius - circle.radius;
+                                        if (distance > maximumDistance) {
+                                            const normalX = offsetX / distance;
+                                            const normalY = offsetY / distance;
+                                            circle.x = center.x + normalX * maximumDistance;
+                                            circle.y = center.y + normalY * maximumDistance;
+                                            const dot = circle.velocity.x * normalX + circle.velocity.y * normalY;
+                                            circle.velocity.x -= 2 * dot * normalX;
+                                            circle.velocity.y -= 2 * dot * normalY;
+                                        }
+                                    }
+
+                                    function drawCircle(circle) {
+                                        context.beginPath();
+                                        context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+                                        context.fillStyle = circle.color;
+                                        context.fill();
+                                        context.lineWidth = 2;
+                                        context.strokeStyle = "white";
+                                        context.stroke();
+                                    }
+
+                                    function draw() {
+                                        context.clearRect(0, 0, canvas.width, canvas.height);
+                                        circles.forEach(drawCircle);
+                                    }
+
+                                    function animate() {
+                                        circles.forEach(updateCircle);
+                                        for (let firstIndex = 0; firstIndex < circles.length && circles.length < maximumCircles; firstIndex += 1) {
+                                            let collisionFound = false;
+                                            for (let secondIndex = firstIndex + 1; secondIndex < circles.length; secondIndex += 1) {
+                                                const first = circles[firstIndex];
+                                                const second = circles[secondIndex];
+                                                const distance = Math.hypot(first.x - second.x, first.y - second.y);
+                                                if (first.cooldown === 0 && second.cooldown === 0 && distance <= first.radius + second.radius) {
+                                                    const radius = Math.sqrt((first.radius ** 2 + second.radius ** 2) / 3);
+                                                    const midpointX = (first.x + second.x) / 2;
+                                                    const midpointY = (first.y + second.y) / 2;
+                                                    const spread = radius * 1.35;
+                                                    first.radius = radius;
+                                                    second.radius = radius;
+                                                    first.x = midpointX - spread;
+                                                    first.y = midpointY;
+                                                    second.x = midpointX + spread / 2;
+                                                    second.y = midpointY - spread * 0.866;
+                                                    first.cooldown = cooldownFrames;
+                                                    second.cooldown = cooldownFrames;
+                                                    const newCircle = createCircle(midpointX + spread / 2, midpointY + spread * 0.866, radius, "#a5a5a5");
+                                                    newCircle.cooldown = cooldownFrames;
+                                                    circles.push(newCircle);
+                                                    collisions += 1;
+                                                    collisionFound = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (collisionFound) break;
+                                        }
+                                        draw();
+                                        requestAnimationFrame(animate);
+                                    }
+
+                                    draw();
+                                    requestAnimationFrame(animate);
+                                })();
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>
