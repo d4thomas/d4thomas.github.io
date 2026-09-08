@@ -33,10 +33,11 @@
                                     const context = canvas.getContext("2d");
                                     const center = { x: 240, y: 240 };
                                     const boundaryRadius = 180;
-                                    const maximumCircles = 5000;
+                                    const maximumCircles = 500;
                                     const cooldownFrames = 90;
                                     let collisions = 0;
                                     let circles = [];
+                                    let growing = true;
 
                                     function createCircle(x, y, radius, color) {
                                         const angle = Math.random() * Math.PI * 2;
@@ -95,28 +96,41 @@
 
                                     function animate() {
                                         circles.forEach(updateCircle);
-                                        for (let firstIndex = 0; firstIndex < circles.length && circles.length < maximumCircles; firstIndex += 1) {
+                                        if (growing && circles.length >= maximumCircles) growing = false;
+                                        else if (!growing && circles.length <= 2) growing = true;
+
+                                        for (let firstIndex = 0; firstIndex < circles.length; firstIndex += 1) {
                                             let collisionFound = false;
                                             for (let secondIndex = firstIndex + 1; secondIndex < circles.length; secondIndex += 1) {
                                                 const first = circles[firstIndex];
                                                 const second = circles[secondIndex];
                                                 const distance = Math.hypot(first.x - second.x, first.y - second.y);
                                                 if (first.cooldown === 0 && second.cooldown === 0 && distance <= first.radius + second.radius) {
-                                                    const radius = Math.sqrt((first.radius ** 2 + second.radius ** 2) / 3);
-                                                    const midpointX = (first.x + second.x) / 2;
-                                                    const midpointY = (first.y + second.y) / 2;
-                                                    const spread = radius * 1.35;
-                                                    first.radius = radius;
-                                                    second.radius = radius;
-                                                    first.x = midpointX - spread;
-                                                    first.y = midpointY;
-                                                    second.x = midpointX + spread / 2;
-                                                    second.y = midpointY - spread * 0.866;
-                                                    first.cooldown = cooldownFrames;
-                                                    second.cooldown = cooldownFrames;
-                                                    const newCircle = createCircle(midpointX + spread / 2, midpointY + spread * 0.866, radius, "#a5a5a5");
-                                                    newCircle.cooldown = cooldownFrames;
-                                                    circles.push(newCircle);
+                                                    if (growing) {
+                                                        const radius = Math.sqrt((first.radius ** 2 + second.radius ** 2) / 3);
+                                                        const midpointX = (first.x + second.x) / 2;
+                                                        const midpointY = (first.y + second.y) / 2;
+                                                        const spread = radius * 1.35;
+                                                        first.radius = radius;
+                                                        second.radius = radius;
+                                                        first.x = midpointX - spread;
+                                                        first.y = midpointY;
+                                                        second.x = midpointX + spread / 2;
+                                                        second.y = midpointY - spread * 0.866;
+                                                        first.cooldown = cooldownFrames;
+                                                        second.cooldown = cooldownFrames;
+                                                        const newCircle = createCircle(midpointX + spread / 2, midpointY + spread * 0.866, radius, "#a5a5a5");
+                                                        newCircle.cooldown = cooldownFrames;
+                                                        circles.push(newCircle);
+                                                    } else {
+                                                        // merge two circles into one, shrinking the population
+                                                        const radius = Math.sqrt(first.radius ** 2 + second.radius ** 2);
+                                                        first.x = (first.x + second.x) / 2;
+                                                        first.y = (first.y + second.y) / 2;
+                                                        first.radius = radius;
+                                                        first.cooldown = cooldownFrames;
+                                                        circles.splice(secondIndex, 1);
+                                                    }
                                                     collisions += 1;
                                                     collisionFound = true;
                                                     break;
