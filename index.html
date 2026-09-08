@@ -153,7 +153,9 @@
 
         <div id="resume-modal-overlay" class="resume-modal-overlay">
             <div class="resume-modal" role="dialog" aria-modal="true" aria-label="Resume">
-                <button type="button" id="resume-modal-close" class="resume-modal-close" aria-label="Close">&times;</button>
+                <div class="resume-modal-close-wrap">
+                    <button type="button" id="resume-modal-close" class="resume-modal-close" aria-label="Close">&times;</button>
+                </div>
 
                 <section class="resume-section">
                     <h2>Qualifications Summary</h2>
@@ -279,16 +281,24 @@
                 const toggle = document.getElementById("resume-toggle");
                 const overlay = document.getElementById("resume-modal-overlay");
                 const closeButton = document.getElementById("resume-modal-close");
+                let scrollPosition = 0;
 
                 function openModal(event) {
                     if (event) event.preventDefault();
+                    scrollPosition = window.scrollY;
                     overlay.classList.add("is-open");
-                    document.body.style.overflow = "hidden";
+                    // iOS Safari ignores plain overflow:hidden for touch scrolling, so pin the body instead
+                    document.body.style.position = "fixed";
+                    document.body.style.top = `-${scrollPosition}px`;
+                    document.body.style.width = "100%";
                 }
 
                 function closeModal() {
                     overlay.classList.remove("is-open");
-                    document.body.style.overflow = "";
+                    document.body.style.position = "";
+                    document.body.style.top = "";
+                    document.body.style.width = "";
+                    window.scrollTo(0, scrollPosition);
                 }
 
                 toggle.addEventListener("click", openModal);
