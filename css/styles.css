@@ -11201,3 +11201,121 @@ body {
   width: 100%;
   height: 100%;
 }
+
+.resume-toggle-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #64a19d;
+  text-decoration: none;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+.resume-toggle-link:hover {
+  color: #7ec2bd;
+  text-decoration: underline;
+}
+.resume-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1050;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 2rem 1rem;
+}
+.resume-modal-overlay.is-open {
+  display: flex;
+}
+.resume-modal {
+  position: relative;
+  max-width: 50rem;
+  max-height: 85vh;
+  width: 100%;
+  overflow-y: auto;
+  background: rgba(17, 17, 17, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  padding: 3rem 1.5rem 2rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.resume-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.resume-modal-close:hover {
+  color: #fff;
+}
+.resume-section {
+  margin-bottom: 2.5rem;
+}
+.resume-section:last-child {
+  margin-bottom: 0;
+}
+.resume-section h2 {
+  font-family: "Varela Round", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-size: 1.1rem;
+  color: #fff;
+  border-bottom: 0.15rem solid #64a19d;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.resume-entry {
+  margin-bottom: 1.5rem;
+}
+.resume-entry:last-child {
+  margin-bottom: 0;
+}
+.resume-entry-title {
+  color: #fff;
+  font-weight: 700;
+}
+.resume-entry-meta {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+.resume-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 0;
+}
+.resume-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+.resume-list li::before {
+  content: "\22A2";
+  position: absolute;
+  left: 0;
+  color: #64a19d;
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 0.5rem 1rem;
+}
+.skills-grid dt {
+  color: #fff;
+  font-weight: 700;
+}
+.skills-grid dd {
+  margin: 0;
+}
+

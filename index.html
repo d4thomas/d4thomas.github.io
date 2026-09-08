@@ -24,6 +24,7 @@
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase">Daniel Thomas</h1>
                         <h2 class="text-white-50 mx-auto mt-2 mb-5">= > ÷</h2>
+                        <a href="#" id="resume-toggle" class="resume-toggle-link">View Resume</a>
                         <div class="circle-simulation">
                             <canvas width="480" height="480" aria-label="Collision Simulation"></canvas>
                             <script>
@@ -149,5 +150,156 @@
                 </div>
             </div>
         </header>
+
+        <div id="resume-modal-overlay" class="resume-modal-overlay">
+            <div class="resume-modal" role="dialog" aria-modal="true" aria-label="Resume">
+                <button type="button" id="resume-modal-close" class="resume-modal-close" aria-label="Close">&times;</button>
+
+                <section class="resume-section">
+                    <h2>Qualifications Summary</h2>
+                    <p>
+                        Patent Practitioner/Technical Professional with an M.Sc. in Computer Science and extensive
+                        legal-technical experience in patent preparation, prosecution, and complex analysis across
+                        multiple technologies. Deeply skilled in evaluating advanced software architectures, AI/ML
+                        systems, NLP frameworks, full-stack applications, metal-organic frameworks, medical
+                        technologies, and pharmaceuticals. Backed by a strong analytical foundation in physics,
+                        chemistry, and mathematics, proven at translating complex technologies into robust patent
+                        applications, validity/infringement evaluations, and freedom-to-operate analyses.
+                    </p>
+                </section>
+
+                <section class="resume-section">
+                    <h2>Professional Experience</h2>
+
+                    <div class="resume-entry">
+                        <div class="resume-entry-title">Patent Practitioner</div>
+                        <div class="resume-entry-meta">
+                            Shackelford, McKinley &amp; Norton (Remote): February 2024 – Current<br />
+                            Patterson + Sheridan (Remote): April 2023 – February 2024<br />
+                            Winstead PC (Dallas, TX): April 2017 – April 2023
+                        </div>
+                        <p>
+                            Conducted deep technical analysis of complex software architectures and AI/ML systems,
+                            evaluated system designs, algorithms, and implementation details. Prepared and prosecuted
+                            patent applications related to software, chemistry, life science, pharmaceuticals, medical
+                            devices, metal-organic frameworks, and batteries. Analyzed patents, patent publications and
+                            non-patent literature in support of patent litigation. Prepared patentability, validity and
+                            infringement analysis. Prepared freedom to operate analysis.
+                        </p>
+                        <div class="resume-entry-title" style="font-weight: 600; font-size: 0.95rem;">Selected Practice Areas:</div>
+                        <ul class="resume-list">
+                            <li>Artificial intelligence, machine learning, and natural language processing</li>
+                            <li>Metal-organic frameworks and batteries</li>
+                            <li>Medical devices and targeted drug delivery platforms</li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-entry-title">Asset Manager</div>
+                        <div class="resume-entry-meta">Superior Energy Services (Houston, TX): May 2014 – September 2016</div>
+                        <p>
+                            Managed teams responsible for asset tracking/utilization, asset maintenance and equipment
+                            certifications. Acted as subject matter expert for equipment and was acting technical
+                            liaison between operations and accounting groups. Managed processes and designed new
+                            workflows to increase productivity between operations and accounting.
+                        </p>
+                        <div class="resume-entry-title" style="font-weight: 600; font-size: 0.95rem;">Selected Accomplishments:</div>
+                        <ul class="resume-list">
+                            <li>
+                                Implemented a computerized maintenance management system that increased preventative
+                                maintenance from 9% to 97% of overall maintenance, decreasing the overall cost of
+                                reactive maintenance while increasing profit
+                            </li>
+                            <li>
+                                Managed and assisted in the development of the Integrated Production Services' Well
+                                Intervention Operations Manual
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-entry-title">Global Advisor</div>
+                        <div class="resume-entry-meta">Halliburton Energy Services (Houston, TX): June 2007 – August 2013</div>
+                        <p>
+                            Managed concurrent projects for multiple clients globally. Prepared technical writings for
+                            clients while providing global technical support internally. Prepared job designs and
+                            reviewed procedures submitted by regional field engineers. Made recommendations for
+                            required equipment to complete the client's desired scope of work. Discussed limitations
+                            and possible job or equipment failure scenarios while recommending and developing
+                            contingency plans for the potential failures. Developed project reports which included
+                            metallurgical fatigue profiles indicating maximum allowable fatigue and other relevant
+                            calculations.
+                        </p>
+                        <div class="resume-entry-title" style="font-weight: 600; font-size: 0.95rem;">Selected Accomplishments:</div>
+                        <ul class="resume-list">
+                            <li>
+                                Dedicated Engineer for BP Angola Block 31 System Integration Test – Created technical
+                                drawings for down hole tools and equipment layouts, and wrote all contingency plans for
+                                subsurface safety valve operations during deep-water well intervention operations
+                            </li>
+                            <li>
+                                Lead Technical Advisor for BP (Muscat, Oman) – Prepared job designs, procedures and
+                                technical write-ups applicable to the scope of work to be conducted during onshore well
+                                intervention operations
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="resume-section">
+                    <h2>Technical Skills</h2>
+                    <dl class="skills-grid">
+                        <dt>Programming</dt>
+                        <dd>Python, C#, JavaScript (Node.js, React, Express), Bash, Zsh</dd>
+                        <dt>Databases &amp; Web</dt>
+                        <dd>MongoDB, MySQL, full-stack development (MERN stack), RESTful APIs</dd>
+                        <dt>Tools &amp; Systems</dt>
+                        <dd>Docker, Git, CI/CD (GitHub Actions), Jira, Linux, macOS, Windows</dd>
+                        <dt>Other</dt>
+                        <dd>Networking protocols, artificial intelligence, machine learning, natural language processing, system architecture analysis, technical documentation</dd>
+                    </dl>
+                </section>
+
+                <section class="resume-section">
+                    <h2>Education</h2>
+                    <div class="resume-entry">
+                        <div class="resume-entry-title">Ball State University — December 2025</div>
+                        <div class="resume-entry-meta">M.Sc. in Computer Science</div>
+                    </div>
+                    <div class="resume-entry">
+                        <div class="resume-entry-title">University of Texas at Arlington — May 2007</div>
+                        <div class="resume-entry-meta">B.Sc. in Physics and Chemistry (Mathematics Minor), Magna Cum Laude Honors</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <script>
+            (() => {
+                const toggle = document.getElementById("resume-toggle");
+                const overlay = document.getElementById("resume-modal-overlay");
+                const closeButton = document.getElementById("resume-modal-close");
+
+                function openModal(event) {
+                    if (event) event.preventDefault();
+                    overlay.classList.add("is-open");
+                    document.body.style.overflow = "hidden";
+                }
+
+                function closeModal() {
+                    overlay.classList.remove("is-open");
+                    document.body.style.overflow = "";
+                }
+
+                toggle.addEventListener("click", openModal);
+                closeButton.addEventListener("click", closeModal);
+                overlay.addEventListener("click", (event) => {
+                    if (event.target === overlay) closeModal();
+                });
+                document.addEventListener("keydown", (event) => {
+                    if (event.key === "Escape") closeModal();
+                });
+            })();
+        </script>
     </body>
 </html>
