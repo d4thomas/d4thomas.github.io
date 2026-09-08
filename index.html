@@ -123,7 +123,6 @@
                                                         newCircle.cooldown = cooldownFrames;
                                                         circles.push(newCircle);
                                                     } else {
-                                                        // merge two circles into one, shrinking the population
                                                         const radius = Math.sqrt(first.radius ** 2 + second.radius ** 2);
                                                         first.x = (first.x + second.x) / 2;
                                                         first.y = (first.y + second.y) / 2;
